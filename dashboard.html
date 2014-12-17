@@ -1,0 +1,299 @@
+<!DOCTYPE HTML>
+
+<html>
+	<head>
+		<meta charset="utf-8">
+	    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	    <meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>TopObserver</title>
+
+		<link href="css/bootstrap.css" rel="stylesheet">
+		<link href="css/main.css" rel="stylesheet">
+
+	</head>
+
+	<body class="container-fluid">
+
+		<header>
+			<nav class="navbar navbar-inverse" role="navigation">
+		      <div class="container-fluid">
+		        <div class="navbar-header">
+		          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+		            <span class="sr-only">Toggle navigation</span>
+		            <span class="icon-bar"></span>
+		            <span class="icon-bar"></span>
+		            <span class="icon-bar"></span>
+		          </button>
+		          <a class="navbar-brand" href="#">
+		          	<img class="nav-logo"alt="TopObserver" src="img/TopObserver.png">
+		          </a>
+		        </div>
+		        <div id="navbar" class="collapse navbar-right navbar-collapse">
+		          <ul class="nav navbar-nav">
+		            <li><a href="#logIn">Log Out</a></li>
+		          </ul>
+		        </div><!--/.nav-collapse -->
+		      </div>
+		    </nav>
+		</header>
+		<div class="container-fluid">
+			<div>
+				<h3>Welcome, Matt</h3>
+			</div>
+			<div class="row">
+				<div class="col-md-3">
+					<table>
+						<tr>
+							<th>Total Inventments</th>
+							<th>Total Companies</th>
+						</tr>
+						<tr>
+							<th>$50,000</th>
+							<th>3</th>
+						</tr>
+					</table>
+				</div>
+				<div class="col-md-3">
+					<div id="chart4" style="width:100%; height:200px;"></div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-3">
+					<div>
+						<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+						  <div class="panel panel-default">
+						    <div class="panel-heading" role="tab" id="headingOne">
+						      <h4 class="panel-title">
+						        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+						          TopObserver
+						        </a>
+						      </h4>
+						    </div>
+						    <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+						      <div class="panel-body">
+						        <ul>
+						        	<li>Funding:     $50,000</li>
+						        	<li>Revenue:     $50,000</li>
+						        	<li>Investors:   2</li>
+						        	<li>Burn Rate:   $5,000</li>
+						        	<li>Zero Date:   4/12/2015</li>
+						        </ul>
+						      </div>
+						    </div>
+						  </div>
+						  <div class="panel panel-default">
+						    <div class="panel-heading" role="tab" id="headingTwo">
+						      <h4 class="panel-title">
+						        <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+						          3DLT
+						        </a>
+						      </h4>
+						    </div>
+						    <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+						      <div class="panel-body">
+						        <ul>
+						        	<li>Funding:     $50,000</li>
+						        	<li>Revenue:     $50,000</li>
+						        	<li>Investors:   2</li>
+						        	<li>Burn Rate:   $5,000</li>
+						        	<li>Zero Date:   4/12/2015</li>
+						        </ul>
+						      </div>
+						    </div>
+						  </div>
+						  <div class="panel panel-default">
+						    <div class="panel-heading" role="tab" id="headingThree">
+						      <h4 class="panel-title">
+						        <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+						          Tixers
+						        </a>
+						      </h4>
+						    </div>
+						    <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+						      <div class="panel-body">
+						        <ul>
+						        	<li>Funding:     $50,000</li>
+						        	<li>Revenue:     $50,000</li>
+						        	<li>Investors:   2</li>
+						        	<li>Burn Rate:   $5,000</li>
+						        	<li>Zero Date:   4/12/2015</li>
+						        </ul>
+						      </div>
+						    </div>
+						  </div>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-9">
+					
+					<div class="row">
+						<div class="col-xs-6 col-md-4">
+					    	<div class="thumbnail">
+						      		<img src="img/logos/TopObserver.jpg" alt="...">
+					      		<div class="caption">
+					        		<h4>Top Observer</h4>
+					        		<h5>Dayton, OH</h5>
+					        		<div id="chart1" style="width:100%; height:200px;"></div>
+					        		<p><a href="#" class="btn btn-primary" role="button">More</a></p>
+					      		</div>
+					   		</div>
+				  		</div>
+					  	<div class="col-xs-6 col-md-4">
+					    	<div class="thumbnail">
+						      	<img src="img/logos/3dlt.jpg" alt="...">
+					      		<div class="caption">
+					        		<h4>3DLT</h4>
+					        		<h5>Cincinnati, OH</h5>
+					        		<div id="chart2" style="width:100%; height:200px;"></div>
+					        		<p><a href="#" class="btn btn-primary" role="button">More</a></p>
+					      		</div>
+					   		</div>
+				  		</div>
+					  	<div class="col-xs-6 col-md-4">
+					    	<div class="thumbnail">
+						      	<img src="img/logos/tixers.jpg" alt="...">
+					      		<div class="caption">
+					        		<h4>Tixers</h4>
+					        		<h5>Covington, KY</h5>
+					        		<div id="chart3" style="width:100%; height:200px;"></div>
+					        		<p><a href="#" class="btn btn-primary" role="button">More</a></p>
+					      		</div>
+					   		</div>
+				  		</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="http://code.highcharts.com/highcharts.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
+	<script>
+    $(function () { 
+    $('#chart1').highcharts({
+        credits: {
+      		enabled: false
+  		},
+        chart: {
+            type: 'line'
+
+        },
+        title: {
+            text: 'Monthly Revenue'
+        },
+        xAxis: {
+            categories: ['Aug', 'Sep', 'Oct']
+        },
+        yAxis: {
+            title: {
+                text: 'Amount'
+            }
+        },
+        series: [{
+            name: 'Company 1',
+            data: [2000,2345,5925]
+        }]
+    });
+});
+    </script>
+    	<script>
+    $(function () { 
+    $('#chart3').highcharts({
+        credits: {
+      		enabled: false
+  		},
+        chart: {
+            type: 'line'
+        },
+        title: {
+            text: 'Monthly Revenue'
+        },
+        xAxis: {
+            categories: ['Aug', 'Sep', 'Oct']
+        },
+        yAxis: {
+            title: {
+                text: 'Amount'
+            }
+        },
+        series: [{
+            name: 'Company 3',
+            data: [21000,23425,5925]
+        }]
+    });
+});
+    </script>
+    <script>
+    $(function () { 
+    $('#chart2').highcharts({
+        credits: {
+      		enabled: false
+  		},
+        chart: {
+            type: 'line'
+        },
+        title: {
+            text: 'Monthly Revenue'
+        },
+        xAxis: {
+            categories: ['Aug', 'Sep', 'Oct']
+        },
+        yAxis: {
+            title: {
+                text: 'Amount'
+            }
+        },
+        series: [{
+            name: 'Company 2',
+            data: [12000,22345,52925]
+        }]
+    });
+});
+    </script>
+    <script>
+    $(function () {
+    $('#chart4').highcharts({
+        credits: {
+      		enabled: false
+  		},
+        chart: {
+            backgroundColor:null,
+            plotBackgroundColor: null,
+            plotBorderWidth: 1,//null,
+            plotShadow: false
+        },
+        title: {
+            text: false
+        },
+        tooltip: {
+            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+        },
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                dataLabels: {
+                    enabled: true,
+                    format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                    style: {
+                        color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                    }
+                }
+            }
+        },
+        series: [{
+            type: 'pie',
+            name: 'Browser share',
+            data: [
+                ['TopObserver',   10000],
+                ['3DLT',       30000],
+                ['Tixers',   10000]
+            ]
+        }]
+    });
+});
+
+    </script>
+	</body>
+</html>

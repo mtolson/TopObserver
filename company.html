@@ -1,0 +1,248 @@
+<!DOCTYPE HTML>
+
+<html>
+	<head>
+		<meta charset="utf-8">
+	    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	    <meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>TopObserver</title>
+
+		<link href="css/bootstrap.css" rel="stylesheet">
+		<link href="css/main.css" rel="stylesheet">
+
+	</head>
+
+	<body class="container-fluid">
+
+		<header>
+			<nav class="navbar navbar-inverse" role="navigation">
+		      <div class="container-fluid">
+		        <div class="navbar-header">
+		          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+		            <span class="sr-only">Toggle navigation</span>
+		            <span class="icon-bar"></span>
+		            <span class="icon-bar"></span>
+		            <span class="icon-bar"></span>
+		          </button>
+		          <a class="navbar-brand" href="#">
+		          	<img class="nav-logo"alt="TopObserver" src="img/TopObserver.png">
+		          </a>
+		        </div>
+		        <div id="navbar" class="collapse navbar-right navbar-collapse">
+		          <ul class="nav navbar-nav">
+		            <li><a href="#logIn">Log Out</a></li>
+		          </ul>
+		        </div><!--/.nav-collapse -->
+		      </div>
+		    </nav>
+		</header>
+		<div class="container-fluid">
+			<div>
+				<h3>Welcome, Matt</h3>
+			</div>
+			<div class="row">
+				<div class="col-md-3">
+					<table>
+						<tr>
+							<th>Total Inventments</th>
+							<th>Total Companies</th>
+						</tr>
+						<tr>
+							<th>$50,000</th>
+							<th>3</th>
+						</tr>
+					</table>
+				</div>
+				<div class="col-md-3">
+					<img src="img/logos/TopObserver.jpg" class ="border">
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-3">
+					<div>
+						<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+						  <div class="panel panel-default">
+						    <div class="panel-heading" role="tab" id="headingOne">
+						      <h4 class="panel-title">
+						        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+						          TopObserver
+						        </a>
+						      </h4>
+						    </div>
+						    <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+						      <div class="panel-body">
+						        <ul>
+						        	<li>Funding:     $50,000</li>
+						        	<li>Revenue:     $50,000</li>
+						        	<li>Investors:   2</li>
+						        	<li>Burn Rate:   $5,000</li>
+						        	<li>Zero Date:   4/12/2015</li>
+						        </ul>
+						      </div>
+						    </div>
+						  </div>
+						  <div class="panel panel-default">
+						    <div class="panel-heading" role="tab" id="headingTwo">
+						      <h4 class="panel-title">
+						        <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+						          3DLT
+						        </a>
+						      </h4>
+						    </div>
+						    <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+						      <div class="panel-body">
+						        <ul>
+						        	<li>Funding:     $50,000</li>
+						        	<li>Revenue:     $50,000</li>
+						        	<li>Investors:   2</li>
+						        	<li>Burn Rate:   $5,000</li>
+						        	<li>Zero Date:   4/12/2015</li>
+						        </ul>
+						      </div>
+						    </div>
+						  </div>
+						  <div class="panel panel-default">
+						    <div class="panel-heading" role="tab" id="headingThree">
+						      <h4 class="panel-title">
+						        <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+						          Tixers
+						        </a>
+						      </h4>
+						    </div>
+						    <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+						      <div class="panel-body">
+						        <ul>
+						        	<li>Funding:     $50,000</li>
+						        	<li>Revenue:     $50,000</li>
+						        	<li>Investors:   2</li>
+						        	<li>Burn Rate:   $5,000</li>
+						        	<li>Zero Date:   4/12/2015</li>
+						        </ul>
+						      </div>
+						    </div>
+						  </div>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-9">
+					<div role="tabpanel">
+				 		 <ul class="nav nav-tabs" role="tablist">
+				    		<li role="presentation" class="active"><a href="#dashboard" aria-controls="dashboard" role="tab" data-toggle="tab">Dashboard</a></li>
+				    		<li role="presentation"><a href="#captable" aria-controls="captable" role="tab" data-toggle="tab">Cap Table</a></li>
+				  		</ul>
+					  	<div class="tab-content">
+						    <div role="tabpanel" class="tab-pane active" id="dashboard">
+						    	<div id="chart2" style="width:100%;"></div>
+						    	<div id="chart4" style="width:50%;" class="l-float"></div>
+						    	<div id="chart3" style="width:50%;" class="r-float"></div>
+						    </div>
+						    <div role="tabpanel" class="tab-pane" id="captable">...</div>
+					  	</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="http://code.highcharts.com/highcharts.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
+    <script>
+    $(function () { 
+    $('#chart3').highcharts({
+        credits: {
+      		enabled: false
+  		},
+        chart: {
+            type: 'line'
+        },
+        title: {
+            text: 'Monthly Burn Rate'
+        },
+        xAxis: {
+            categories: ['Aug', 'Sep', 'Oct']
+        },
+        yAxis: {
+            title: {
+                text: 'Amount'
+            }
+        },
+        series: [{
+            name: 'TopObserver',
+            data: [1000,2225,3298]
+        }]
+    });
+});
+    </script>
+    <script>
+    $(function () { 
+    $('#chart2').highcharts({
+        credits: {
+      		enabled: false
+  		},
+        chart: {
+            type: 'line'
+        },
+        title: {
+            text: 'Monthly Revenue'
+        },
+        xAxis: {
+            categories: ['Aug', 'Sep', 'Oct']
+        },
+        yAxis: {
+            title: {
+                text: 'Amount'
+            }
+        },
+        series: [{
+            name: 'TopObserver',
+            data: [0,245,250]
+        }]
+    });
+});
+    </script>
+    <script>
+    $(function () {
+    $('#chart4').highcharts({
+        credits: {
+      		enabled: false
+  		},
+        chart: {
+            backgroundColor:null,
+            plotBackgroundColor: null,
+            plotBorderWidth: 1,//null,
+            plotShadow: false
+        },
+        title: {
+            text: 'Stakholders'
+        },
+        tooltip: {
+            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+        },
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                dataLabels: {
+                    enabled: true,
+                    format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                    style: {
+                        color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                    }
+                }
+            }
+        },
+        series: [{
+            type: 'pie',
+            name: 'Browser share',
+            data: [
+                ['Full Sail Investors',   50],
+                ['Matt Tolson',   50]
+            ]
+        }]
+    });
+});
+
+    </script>
+	</body>
+</html>
