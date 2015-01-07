@@ -1,5 +1,12 @@
-<!DOCTYPE HTML>
+<?php
+    session_start();
+    if(isset($_SESSION['message']))
+    {
+        $message=$_SESSION['message'];
+        unset($_SESSION['message']);
+    }
 
+?>
 <html>
 	<head>
 		<meta charset="utf-8">
@@ -31,7 +38,17 @@
 		        <div id="navbar" class="collapse navbar-right navbar-collapse">
 		          <ul class="nav navbar-nav">
 		            <li><a href="#sign-up">Sign Up</a></li>
-		            <li><a href="dashboard.html">Log In</a></li>
+		            <li>
+		            	<form action="login.php" method="POST">
+		            		<p>Email:
+		            			<input type="text" name="email1" value=""/>
+		            		</p>
+		            		<p>Password:
+		            			<input type="password" name="password1" value=""/>
+		            		</p>
+		            		<input type="submit" name="submit1" value="submit1"/>
+		            	</form> 
+		            </li>
 		          </ul>
 		        </div><!--/.nav-collapse -->
 		      </div>
@@ -42,6 +59,13 @@
 				<div class="open col-md-12">
 				</div>
 				<div class="second col-md-12">
+					<?php
+						if(isset($message)){
+							echo '<h1>'.$message.'</h1>';
+						}
+					?>
+
+
 					<h1>Follow your Startup from the First Investment to the last</h1>
 				</div>
 			</div>
@@ -140,7 +164,7 @@
 					</div>
 				</div>
 				<div class="col-md-3 col-md-offset-1 register">
-					<form action="" method="POST">
+					<form action="signup.php" method="POST">
 						<label for="fname">First Name<span>*</span></label></br>
 						<input type="text" name="fname" placeholder="First Name" id="fname" required/></br>
 						<label for="lname">Last Name<span>*</span></label></br>
@@ -148,15 +172,15 @@
 						<label for="email">Email<span>*</span></label></br>
 						<input type="email" name="email" placeholder="Email Address" id="email" required/></br>
 						<label for="password">Password<span>*</span></label></br>
-						<input type="password" name="password" placeholder="Password" pattern=".{7}" id="password" required/></br>
-						<label for="company">Company</label></br>
-						<input type="text" name="company" placeholder="Company Name" id="company"/></br>
+						<input type="password" name="password" placeholder="Password" id="password" required/></br>
 						<p>* required</p>
 						<input class="btn btn-primary"type="submit"/>
 					</form>
 				</div>
 			</div>
 		</div>
+
+
 
 	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>

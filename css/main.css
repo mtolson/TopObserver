@@ -131,3 +131,11 @@ h1, h2{
 .clear{
 	clear: both;
 }
+
+.row{
+	padding-bottom: 10px;
+}
+
+.page-btns a{
+	margin-top: 10px;
+}
