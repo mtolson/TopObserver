@@ -139,3 +139,16 @@ h1, h2{
 .page-btns a{
 	margin-top: 10px;
 }
+
+/*.company_logo{
+	width: 200px;
+	height: 150px;
+}*/
+
+.edit_btn{
+	margin:10px;
+}
+
+.add-company{
+	background-color: white;
+}

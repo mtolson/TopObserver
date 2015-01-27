@@ -1,49 +1,67 @@
 <?php 
 	session_start();
 	if(!isset($_SESSION['user_id'])){
+		$message = $_SESSION["message"];
 		unset($_SESSION['message']);
 		$_SESSION['message'] = "Please Login";
 		header("Location: index.php");
+	}
+	$message = "";
+	if (isset($_SESSION["message"])){
+		$message = $_SESSION["message"];
+		unset($_SESSION['message']);
 	}
 	include("functions.php");
     $user_fname=$_SESSION['user_fname'];
     $user_id=$_SESSION['user_id'];
 	$company_id = $_GET['id'];
+	
 	if(isset($_GET['cid'])){
 		$cid=$_GET['cid'];
 	}else{
 		$cid = NULL;
 	}
+	
 	if ($_SERVER['REQUEST_METHOD']=='POST'){
-        if(isset($_POST['id'])){
-
+        if(isset($_POST['user_id'])){
 	        $dbh = database();
-	        $cid = $_POST['id'];
-	        $date = $_POST['date'];
-	        $burnrate = $_POST['burnrate'];
-	        $revenue = $_POST['revenue'];
-	        $visitors = $_POST['visitors'];
-	        $funding = $_POST['funding'];
-	        $stmt=$dbh->prepare("UPDATE company_data SET date='".$date."', burnrate='".$burnrate."',revenue='".$revenue."',visitors='".$visitors."',funding='".$funding."' WHERE id='".$cid."';");
+	        $user_id = $_POST['user_id'];
+	        $fname = $_POST['fname'];
+	        $lname = $_POST['lname'];
+	        $email = $_POST['email'];
+	        $role = $_POST['role'];
+	        $cp_id = $_POST['id'];
+	        $stmt=$dbh->prepare("UPDATE user u SET u.fname = '".$fname."', u.lname = '".$lname."', u.email = '".$email."'where u.id =".$user_id.";");
 	        $stmt->execute();
-	        header('Location: editmetric.php?id='.$company_id.'');
-	    }else{
+	        $stmt2=$dbh->prepare("UPDATE company_permissions SET permission_id=".$role." where id =".$cp_id.";");
+	        $stmt2->execute();
+	        header('Location: admin.php?id='.$company_id.'');
+	    }elseif(isset($_GET['add'])){
 	    	$dbh = database();
-		    $company_id = $company_id;
-	        $date = $_POST['date'];
-	        $burnrate = $_POST['burnrate'];
-	        $revenue = $_POST['revenue'];
-	        $visitors = $_POST['visitors'];
-	        $funding = $_POST['funding'];
-	        $stmt=$dbh->prepare("INSERT INTO company_data (company_id, date, burnrate, revenue, visitors, funding) VALUES(:company_id, :date, :burnrate, :revenue, :visitors, :funding);");
-	        $stmt->bindParam(':company_id', $company_id);
-	        $stmt->bindParam(':date', $date);
-	        $stmt->bindParam(':burnrate', $burnrate);
-	        $stmt->bindParam(':revenue', $revenue);
-	        $stmt->bindParam(':visitors', $visitors);
-	        $stmt->bindParam(':funding', $funding);
+	        $email1 = $_POST['email'];
+	        $stmt=$dbh->prepare("SELECT fname, lname, email, id FROM user WHERE email='".$email1."';");
 	        $stmt->execute();
-	        header('Location: editmetric.php?id='.$company_id.'');
+	        $result = $stmt->fetchall(PDO::FETCH_ASSOC);
+	        if (isset($result['0']['email'])){
+	        	$permission_id = 3;
+	        	$id=$result['0']['id'];
+	        	$dbh = database();
+	        	$stmt=$dbh->prepare("INSERT INTO company_permissions (user_id, company_id, permission_id) VALUES(:user_id, :company_id, :permission_id);");
+	        	$stmt->bindParam(':user_id', $id);
+				$stmt->bindParam(':company_id', $company_id);
+				$stmt->bindParam(':permission_id', $permission_id);
+				$stmt->execute();
+				header('Location: admin.php?id='.$company_id.'');
+	        }else{
+	        	$dbh = database();
+	        	$email = $_POST['email'];
+	        	$stmt=$dbh->prepare("INSERT INTO temp_user (email, comp_id) VALUES(:email, :company_id);");
+	        	$stmt->bindParam(':email', $email);
+				$stmt->bindParam(':company_id', $company_id);
+				$stmt->execute();
+				$_SESSION["message"] = "No Email found. When user signs up with that email they will have view access.";
+				header('Location: admin.php?id='.$company_id.'');
+	        }
 	    }
     }
 ?>
@@ -86,7 +104,7 @@
 		<div class="container-fluid">
 			<div class="row">
 				<div class="col-md-10 col-s-10 col-xs-12">
-					<h3>Edit Metrics</h3>
+					<h3>Edit/Add Users</h3>
 				</div>
 				<div class="col-md-2">
 					<a href='company.php?id=<?php echo $company_id?>'class='btn btn-primary btn-sm r-float'>Back to Company</a>
@@ -99,20 +117,22 @@
 				</div>
 			</div>
 			<div class="row">
+			    <p class="r-float"><?php echo $message?></p>
 			    <div role="tabpanel" class="tab-pane col-md-12" id="editmetrics">
-			    	<form action="editmetric.php?id=<?php echo $company_id?>" method="POST">
-				    	<a href='editmetric.php?id=<?php echo $company_id?>&cid=new' type='button' class='btn btn-primary btn-sm r-float'>Add</a>
+			    	<form action="admin.php?id=<?php echo $company_id?>&add=y" method="POST" class='r-float'>
+			    		<input type='text' name='email' id='email' placeholder='email address'/>
+			    		<input type='submit' class='btn btn-primary btn-sm' value='Add User'/>
+			    	</form>
+			    	<!-- a href='add.php?id=<?php echo $company_id?>&cid=new' type='button' class='btn btn-primary btn-sm r-float'>Add User</a> -->
+			    	<form action="admin.php?id=<?php echo $company_id?>" method="POST">
 				    	<table class="table">
 				    		<tr>
-				    			<th>Date</th>
-				    			<th>Burnrate</th>
-				    			<th>Revenue</th>
-				    			<th>Visitors</th>
-				    			<th>Funding</th>
-				    			<th>Edit</th>
+				    			<th>First Name</th>
+				    			<th>Last Name</th>
+				    			<th>Email</th>
+				    			<th>Access</th>
 				    		</tr>
-				    		<?php echo add_metrics($company_id, $cid);?>
-				    		<?php echo edit_metrics($company_id, $cid);?>
+				    		<?php echo edit_users($company_id, $cid);?>
 				    	</table>
 				    </form>
 			    </div>

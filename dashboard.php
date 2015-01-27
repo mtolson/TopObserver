@@ -49,6 +49,7 @@
 		<div class="container-fluid">
 			<div>
 				<h3>Welcome, <?php echo $user_fname;?> </h3>
+				<a href="addcompany.php" type='button' class='btn btn-primary btn-sm r-float'>Add Company</a>
 			</div>
 			<div class="row">
 				<div class="col-md-3">
@@ -76,7 +77,7 @@
 
     <script>
     $(function () {
-    $('#chart4').highcharts({
+    $('#test').highcharts({
         credits: {
       		enabled: false
   		},

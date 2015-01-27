@@ -60,7 +60,7 @@
 			<div class="row">
 				<div class="col-md-3">
 				</div>
-				<div class="col-md-3">
+				<div class="col-md-3 thumbnail">
 					<img src="img/logos/<?php echo get_logo($company_id);?>" class ="border">
 				</div>
 				<div class="col-md-6">
@@ -81,12 +81,14 @@
 				  		</ul>
 					  	<div class="tab-content">
 						    <div role="tabpanel" class="tab-pane active" id="dashboard">
-						    	<a href="editmetric.php?id=<?php echo $company_id;?>" class="btn btn-primary btn-sm r-float">Edit/Add</a>
+						    	<?php echo admin_edit($company_id, $user_id);?>
 						    	<div id="chart2" class='col-md-12'></div>
 						    	<div id="chart1" class='col-md-6'></div>
 						    	<div id="chart3" class='col-md-6'></div>
 						    </div>
-						    <div role="tabpanel" class="tab-pane" id="captable">...</div>
+						    <div role="tabpanel" class="tab-pane" id="captable">
+						    	<h3><center>Coming soon</center></h3>
+						    </div>
 					  	</div>
 					</div>
 				</div>

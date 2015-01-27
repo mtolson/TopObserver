@@ -85,7 +85,7 @@
 			$left_nav .= '</div>';
 			return $left_nav;
 		}else{
-			return 'NONE';
+			return null;
 		}
 		
 	}
@@ -101,24 +101,29 @@
 	function thumbnails($user_id){
 		$result = db_dashboard_query($user_id);
 		$thumbnail ='';
-		foreach ($result as $thumb) {
-			$cid = $thumb['id'];
-			$compinfo = company_info($cid);
-			
-			$thumbnail .= '
-			<div class="col-xs-6 col-md-4">
-				<div class="thumbnail">
-	      			<img src="img/logos/'.$compinfo['0']['logo'].'" alt="...">
-	  				<div class="caption">
-	    				<h4>'.$compinfo['0']['company'].'</h4>
-		        		<h5>Dayton, OH</h5>
-		        		<div id="chart'.$cid.'" style="width:100%; height:200px;"></div>
-		        		<p><a href="company.php?id='.$compinfo['0']['id'].'" class="btn btn-primary" role="button">More</a></p>
-		      		</div>
-					</div>
-				</div>';
+		if ($result[0]['id']!== null){
+	
+			foreach ($result as $thumb) {
+				$cid = $thumb['id'];
+				$compinfo = company_info($cid);
+				
+				$thumbnail .= '
+				<div class="col-xs-6 col-md-4">
+					<div class="thumbnail">
+		      			<img src="img/logos/'.$compinfo['0']['logo'].'" alt="...">
+		  				<div class="caption">
+		    				<h4>'.$compinfo['0']['company'].'</h4>
+			        		<h5>Dayton, OH</h5>
+			        		<div id="chart'.$cid.'" style="width:100%; height:200px;"></div>
+			        		<p><a href="company.php?id='.$compinfo['0']['id'].'" class="btn btn-primary" role="button">More</a></p>
+			      		</div>
+						</div>
+					</div>';
+			}
+			return $thumbnail;
+		}else{
+			return "<h3>Add a new Company to get started!</h3>";
 		}
-		return $thumbnail;
 	}
 
 	function small_revenue($chartid){
@@ -132,52 +137,58 @@
 	function dashboard_revenue($user_id){
 		$result = db_dashboard_query($user_id);
 		$chart_sm ="";
-		foreach ($result as $chart) {
-			$chartid = $chart['id'];
-			$chartinfo = small_revenue($chartid);
-    		$revenue = '[';
-    		$chartDate = '[';
-    		$chartTitle= $chartinfo['0']['company'];
-    		
-    		foreach ($chartinfo as $infochart) {
-    			$revenue .= $infochart['revenue'].',';
-    			$chartDate .= '\''.$infochart['month'].'\',';
-    		}
-    		
-    		$useable_revenue = substr_replace($revenue, "]", -1);
-    		$useable_month = substr_replace($chartDate, "]", -1);
+		if ($result[0]['id']!== null){
 
-			$chart_sm .= "
-			<script>
-			    $(function () { 
-			    $('#chart".$chartid."').highcharts({
-			        credits: {
-			      		enabled: false
-			  		},
-			        chart: {
-			            type: 'line'
+			foreach ($result as $chart) {
+				$chartid = $chart['id'];
+				$chartinfo = small_revenue($chartid);
+	    		$revenue = '[';
+	    		$chartDate = '[';
+	    		if(isset($chartinfo['0']['company'])){
+	    			$chartTitle= $chartinfo['0']['company'];
+	    		}
+	    		
+	    		foreach ($chartinfo as $infochart) {
+	    			$revenue .= $infochart['revenue'].',';
+	    			$chartDate .= '\''.$infochart['month'].'\',';
+	    		}
+	    		
+	    		$useable_revenue = substr_replace($revenue, "]", -1);
+	    		$useable_month = substr_replace($chartDate, "]", -1);
 
-			        },
-			        title: {
-			            text: 'Monthly Revenue'
-			        },
-			        xAxis: {
-			            categories: ".$useable_month."
-			        },
-			        yAxis: {
-			            title: {
-			                text: 'Amount'
-			            }
-			        },
-			        series: [{
-			            name: '".$chartTitle."',
-			            data: ".$useable_revenue."
-			        }]
-			    });
-			});
-			    </script>";
+				$chart_sm .= "
+				<script>
+				    $(function () { 
+				    $('#chart".$chartid."').highcharts({
+				        credits: {
+				      		enabled: false
+				  		},
+				        chart: {
+				            type: 'line'
+
+				        },
+				        title: {
+				            text: 'Monthly Revenue'
+				        },
+				        xAxis: {
+				            categories: ".$useable_month."
+				        },
+				        yAxis: {
+				            title: {
+				                text: 'Amount'
+				            }
+				        },
+				        series: [{
+				            name: '".$chartTitle."',
+				            data: ".$useable_revenue."
+				        }]
+				    });
+				});
+				    </script>";
+			}
+			return $chart_sm;
 		}
-		return $chart_sm;
+
 	}
 
 	function company_chart_metrics($company_id){
@@ -258,7 +269,7 @@
 	function add_metrics($company_id, $cid){
 		if($cid==="new"){
 			$addinfo ='<tr>';
-			$addinfo .="<td><input type'date' name='date' id='date' required/></td>";
+			$addinfo .="<td><input type'date' name='date' id='date' placeholder='2015-01-30'required/></td>";
 			$addinfo .="<td><input type='number' name='burnrate' value'0' id='burnrate' required/></td>";
 			$addinfo .="<td><input type='number' name='revenue' value'0' id='revenue' required/></td>";
 			$addinfo .="<td><input type='number' name='visitors' value'0' id='visitors' required/></td>";
@@ -307,8 +318,16 @@
 		$stmt = $dbh->prepare('SELECT company_id, SUM(funding) "Total Funding", SUM(revenue) "Total Revenue" FROM company_data WHERE company_id = '."$company_id".' GROUP BY company_id;');
 		$stmt->execute(); 
     	$result = $stmt->fetchall(PDO::FETCH_ASSOC);
-    	$info ="<h4>Total Funding: $".number_format($result['0']['Total Funding'])."</h4>";
-    	$info .="<h4>Total Revenue: $".number_format($result['0']['Total Revenue'])."</h4>";
+    	if (isset($result['0']['Total Funding'])){
+    		$info ="<h4>Total Funding: $".number_format($result['0']['Total Funding'])."</h4>";
+    	}else{
+    		$info ="<h4>Total Funding: $0</h4>";
+    	}
+    	if(isset($result['0']['Total Revenue'])){
+    		$info .="<h4>Total Revenue: $".number_format($result['0']['Total Revenue'])."</h4>";
+    	}else{
+    		$info .="<h4>Total Revenue: $0</h4>";
+    	}
     	return $info;
 
 	}
@@ -320,15 +339,71 @@
     	if ($result['0']['permission_id']==='1' || $result['0']['permission_id']==='2'){
     		$info="<a href='dashboard.php'class='btn btn-primary btn-sm r-float'>Dashboard</a>
 					<br class='clear'>
-					<a href='dashboard.php'class='btn btn-primary btn-sm r-float'>Admin</a>";
+					<a href='admin.php?id=".$company_id."'class='btn btn-primary btn-sm r-float'>Admin</a>";
     		return $info;
     	}else{
 			$info="<a href='dashboard.php'class='btn btn-primary btn-sm r-float'>Dashboard</a>";
     		return $info;
     	}
 	}
+	function admin_edit($company_id, $uid){
+		$dbh = database();
+		$stmt = $dbh->prepare('SELECT permission_id FROM company_permissions where company_id="'.$company_id.'" AND user_id="'.$uid.'";');
+		$stmt->execute(); 
+    	$result = $stmt->fetchall(PDO::FETCH_ASSOC);
+    	if ($result['0']['permission_id']==='1' || $result['0']['permission_id']==='2'){
+    		$info="<a href='editmetric.php?id=".$company_id."' class='btn btn-primary btn-sm r-float edit_btn'>Edit/Add</a>";
+    		return $info;
+    	}
+	}
 
-
+	function edit_users($company_id, $cid){
+		
+		$dbh = database();
+		$stmt = $dbh->prepare('SELECT fname, lname, email, role, cp.id, cp.user_id FROM user u Left JOIN company_permissions cp ON cp.user_id =u.id LEFT JOIN company c ON c.id = cp.company_id LEFT JOIN permissions p ON p.id = cp.permission_id WHERE cp.company_id ='.$company_id.';');
+		$stmt->execute(); 
+    	$result = $stmt->fetchall(PDO::FETCH_ASSOC);
+    	$info ="";
+    	foreach ($result as $metric){
+    		if($metric['user_id']===$cid){
+    			$u_role = $metric['role'];
+    			$info .= "<tr>";
+    			$info .="<td><input type='hidden' name='id' id='id' value='".$metric['id']."'/><input type='hidden' name='user_id' id='user_id' value='".$metric['user_id']."'/><input type='text' name='fname' id='fname' value='".$metric['fname']."'/></td>";
+	    		$info .="<td><input type='text' name='lname' id='lname' value='".$metric['lname']."'/></td>";
+	    		$info .="<td><input type='text' name='email' id='email' value='".$metric['email']."'/></td>";
+    			$info .="<td><select name='role' id='role'>";
+    			$info .= get_roles($u_role);
+    			$info .="</select>";
+    			$info .="<td><input type='submit' class='btn btn-primary btn-sm'></input></td>";
+    			$info .="</tr>";
+    		}else{
+	    		$info .= "<tr>";
+	    		$info .="<td>".$metric['fname']."</td>";
+	    		$info .="<td>".$metric['lname']."</td>";
+	    		$info .="<td>".$metric['email']."</td>";
+	    		$info .="<td>".$metric['role']."</td>";
+				$info .="<td> <a href='admin.php?id=".$company_id."&cid=".$metric['user_id']."' type='button' class='btn btn-primary btn-sm'>Edit</a></td>";
+				$info .="</tr>";
+			}
+    	}
+    	return $info;
+	}
+	function get_roles($u_role){
+		$dbh = database();
+		$stmt = $dbh->prepare('SELECT id, role FROM permissions;');
+		$stmt->execute(); 
+    	$result = $stmt->fetchall(PDO::FETCH_ASSOC);
+    	$info ="";
+    	foreach ($result as $roles){
+    		if($roles['role']==$u_role){
+    			$info .= "<option selected='selected' value='".$roles['role']."'>".$roles['role']."</option>";
+    			
+    		}else{
+    			$info .= "<option value='".$roles['id']."'>".$roles['role']."</option>";		
+    		}
+    	}
+		return $info;
+	}
 
 
 

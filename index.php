@@ -1,5 +1,6 @@
 <?php
     session_start();
+    $message="";
     if(isset($_SESSION['message']))
     {
         $message=$_SESSION['message'];
@@ -38,34 +39,27 @@
 		        <div id="navbar" class="collapse navbar-right navbar-collapse">
 		          <ul class="nav navbar-nav">
 		            <li><a href="#sign-up">Sign Up</a></li>
-		            <li>
+		            <li style="padding-top:10px;">
 		            	<form action="login.php" method="POST">
-		            		<p>Email:
-		            			<input type="text" name="email1" value=""/>
-		            		</p>
-		            		<p>Password:
-		            			<input type="password" name="password1" value=""/>
-		            		</p>
-		            		<input type="submit" name="submit1" value="submit1"/>
+		            			<input type="text" name="email1" placeholder="email"/>
+		            			<input type="password" name="password1" placeholder="password"/>
+		            		<input type="submit" name="submit1" value="Login"/>
+
 		            	</form> 
 		            </li>
 		          </ul>
+		          
 		        </div><!--/.nav-collapse -->
 		      </div>
 		    </nav>
+		    <p style="color:red; text-align:center;"><?php echo $message?><p>
 		</header>
 		<div class="container-fluid">
 			<div class="row btm-margin main">
 				<div class="open col-md-12">
+					
 				</div>
 				<div class="second col-md-12">
-					<?php
-						if(isset($message)){
-							echo '<h1>'.$message.'</h1>';
-						}
-					?>
-
-
 					<h1>Follow your Startup from the First Investment to the last</h1>
 				</div>
 			</div>
@@ -93,7 +87,7 @@
 					<h2>Fresh Look on Managing Portfolio</h2>
 				</div>
 				<div class="col-md-8 col-md-offset-2">
-					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque vel felis nibh. Phasellus cursus hendrerit congue. Mauris ac nulla eu nibh facilisis maximus id sed nunc. Pellentesque finibus consequat nisl at eleifend. Suspendisse vestibulum, ligula et tristique luctus, justo leo lobortis felis, eget pellentesque diam elit sit amet lorem.</p>
+					<p>No matter how many funds you manage, or how many investments they include, TopObserver keeps you in control. Analyze your funds' performance with high level metrics, and get quick get access to portfolio company information.</p>
 				</div>
 				<div class="col-md-12">
 					<div class="l-img btm-margin">
@@ -101,13 +95,13 @@
 					</div>
 				</div>
 				<div class="col-md-2 col-md-offset-2">
-					<h3 class="text-center">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</h3>
+					<h3 class="text-center">Control Cap Tables</h3>
 				</div>
 				<div class="col-md-2 col-md-offset-1">
-					<button class="btn btn-primary">SIGN UP NOW ITS FREE</button>
+					<a href="#sign-up" class="btn btn-primary">SIGN UP NOW ITS FREE</a>
 				</div>
 				<div class="col-md-2 col-md-offset-1">
-					<h3 class="text-center">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</h3>
+					<h3 class="text-center">Track and Share Easily</h3>
 				</div>
 			</div>
 			<div id="start-up" class="row btm-margin">
@@ -115,7 +109,7 @@
 					<h2>Bright New Ideas to Managing your Startup</h2>
 				</div>
 				<div class="col-md-8 col-md-offset-2">
-					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque vel felis nibh. Phasellus cursus hendrerit congue. Mauris ac nulla eu nibh facilisis maximus id sed nunc. Pellentesque finibus consequat nisl at eleifend. Suspendisse vestibulum, ligula et tristique luctus, justo leo lobortis felis, eget pellentesque diam elit sit amet lorem.</p>
+					<p>No more tedious spreadsheets, piecemeal powerpoints, or endless email chains. TopObserver gives you one place for everything and everyone. Organize your most important investment and performance data while keeping shareholders informed, all from a single online platform.</p>
 				</div>
 				<div class="col-md-12">
 					<div class="l-img btm-margin">
@@ -123,13 +117,13 @@
 					</div>
 				</div>
 				<div class="col-md-2 col-md-offset-2">
-					<h3 class="text-center">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</h3>
+					<h3 class="text-center">Manage Collaboratively</h3>
 				</div>
 				<div class="col-md-2 col-md-offset-1">
-					<button class="btn btn-primary">SIGN UP NOW ITS FREE</button>
+					<a href="#sign-up" class="btn btn-primary">SIGN UP NOW ITS FREE</a>
 				</div>
 				<div class="col-md-2 col-md-offset-1">
-					<h3 class="text-center">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</h3>
+					<h3 class="text-center">Easy Company Intel</h3>
 				</div>
 			</div>
 			<div id="reporting" class="row btm-margin">
@@ -137,7 +131,7 @@
 					<h2>Easy Reporting</h2>
 				</div>
 				<div class="col-md-8 col-md-offset-2">
-					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque vel felis nibh. Phasellus cursus hendrerit congue. Mauris ac nulla eu nibh facilisis maximus id sed nunc. Pellentesque finibus consequat nisl at eleifend. Suspendisse vestibulum, ligula et tristique luctus, justo leo lobortis felis, eget pellentesque diam elit sit amet lorem.</p>
+					<p>As your investments change, TopObserver calculates. Whether you're a founder, advisor, angel investor, incubator, venture capitalist, or limited partner, TopObserver tracks and manages all of your holdings, giving you a complete and comprehensive understanding of your portfolio's performance.</p>
 				</div>
 				<div class="col-md-12">
 					<div class="btm-margin">
@@ -145,13 +139,13 @@
 					</div>
 				</div>
 				<div class="col-md-2 col-md-offset-2">
-					<h3 class="text-center">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</h3>
+					<h3 class="text-center">Total Visibility</h3>
 				</div>
 				<div class="col-md-2 col-md-offset-1">
-					<button class="btn btn-primary">SIGN UP NOW ITS FREE</button>
+					<a href="#sign-up" class="btn btn-primary">SIGN UP NOW ITS FREE</a>
 				</div>
 				<div class="col-md-2 col-md-offset-1">
-					<h3 class="text-center">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</h3>
+					<h3 class="text-center">Grows with You</h3>
 				</div>
 			</div>
 			<div id="sign-up" class="row btm-margin">
@@ -164,7 +158,7 @@
 					</div>
 				</div>
 				<div class="col-md-3 col-md-offset-1 register">
-					<form action="signup.php" method="POST">
+					<form action="adduser.php" method="POST">
 						<label for="fname">First Name<span>*</span></label></br>
 						<input type="text" name="fname" placeholder="First Name" id="fname" required/></br>
 						<label for="lname">Last Name<span>*</span></label></br>
