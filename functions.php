@@ -155,38 +155,41 @@
 	    		
 	    		$useable_revenue = substr_replace($revenue, "]", -1);
 	    		$useable_month = substr_replace($chartDate, "]", -1);
+	    		
+	    		if(isset($chartTitle)){
+					$chart_sm .= "
+					<script>
+					    $(function () { 
+					    $('#chart".$chartid."').highcharts({
+					        credits: {
+					      		enabled: false
+					  		},
+					        chart: {
+					            type: 'line'
 
-				$chart_sm .= "
-				<script>
-				    $(function () { 
-				    $('#chart".$chartid."').highcharts({
-				        credits: {
-				      		enabled: false
-				  		},
-				        chart: {
-				            type: 'line'
-
-				        },
-				        title: {
-				            text: 'Monthly Revenue'
-				        },
-				        xAxis: {
-				            categories: ".$useable_month."
-				        },
-				        yAxis: {
-				            title: {
-				                text: 'Amount'
-				            }
-				        },
-				        series: [{
-				            name: '".$chartTitle."',
-				            data: ".$useable_revenue."
-				        }]
-				    });
-				});
-				    </script>";
+					        },
+					        title: {
+					            text: 'Monthly Revenue'
+					        },
+					        xAxis: {
+					            categories: ".$useable_month."
+					        },
+					        yAxis: {
+					            title: {
+					                text: 'Amount'
+					            }
+					        },
+					        series: [{
+					            name: '".$chartTitle."',
+					            data: ".$useable_revenue."
+					        }]
+					    });
+					});
+					    </script>";
+					return $chart_sm;
+				}
 			}
-			return $chart_sm;
+			
 		}
 
 	}

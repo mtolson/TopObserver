@@ -1,9 +1,8 @@
 <?php
     session_start();
     unset($_SESSION['logged']);
-    $user ="root";
-    $pass = "root";
-    $dbh = new PDO('mysql:host=localhost;dbname=topobserver;port=8889',$user, $pass);
+    include("functions.php");
+    $dbh = database();
     if ($_SERVER['REQUEST_METHOD']=='POST'){
         $fname = $_POST['fname'];
         $lname = $_POST['lname'];

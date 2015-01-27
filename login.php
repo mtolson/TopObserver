@@ -2,6 +2,7 @@
 	session_start();
 	unset($_SESSION['user_fname']);
 	unset($_SESSION['user_id']);
+	include("functions.php");
 	if (isset($_POST['submit1'])){
 		// $required_fields = array("email1", "password1");
 		// validate_presences($required_fields);
@@ -29,10 +30,7 @@
 	}
 
 	function find_user_by_email($email){
-	    $user ="root";
-    	$pass = "root";
-		$dbh = new PDO('mysql:host=localhost;dbname=topobserver;port=8889',$user, $pass);
-
+	    $dbh = database();
 		$stmt = $dbh->prepare("SELECT * FROM user WHERE email = '{$email}' LIMIT 1");
 		$stmt->execute();
 		$result = $stmt->fetchall(PDO::FETCH_ASSOC);
